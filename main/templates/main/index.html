@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="container-fluid bg-primary mb-5">
+    <nav class="navbar navbar-light bg-primary text-white container">
+        <a class="navbar-brand text-white font-weight-bold text-uppercase" href="#">Fraud prediction</a>
+    </nav>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h1>Your tasks:</h1>
+            <div class="row">
+                <div class="col-4">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
+                           href="#list-home" role="tab" aria-controls="home">Not solved</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
+                           href="#list-profile" role="tab" aria-controls="profile">Solved</a>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="list-home" role="tabpanel"
+                             aria-labelledby="list-home-list">Not solved tasks
+                        </div>
+                        <div class="tab-pane fade" id="list-profile" role="tabpanel"
+                             aria-labelledby="list-profile-list">Solved tasks
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="text-center">
+                <h1>Hello!</h1>
+                <p>Type transaction information and wait for your solution</p>
+            </div>
+            <form class="w-100">
+                <div class="form-group">
+                    <label for="operationType">Operation Type</label>
+                    <input type="email" class="form-control" id="operationType" aria-describedby="operationHelp">
+                    <small id="operationHelp" class="form-text text-muted">Here you should type operation type</small>
+                </div>
+                <div class="form-group">
+                    <label for="operationAmount">Operation Amount</label>
+                    <input type="password" class="form-control" id="operationAmount">
+                </div>
+                <button type="submit" class="btn btn-primary">Send Task</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
