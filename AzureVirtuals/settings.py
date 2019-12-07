@@ -77,8 +77,13 @@ WSGI_APPLICATION = 'AzureVirtuals.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd3c650q3aoqcg6',
+        'USER': 'qghnnmdmuizgsr',
+        'PASSWORD': '9ac4fe7b2c294dc8a8a5d8ed42aca61e1ed790d1b5a3e62a2c869d5f8f0a3380',
+        'HOST': 'ec2-174-129-254-220.compute-1.amazonaws.com',
+        'PORT': '5432',
+
     }
 }
 

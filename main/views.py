@@ -1,17 +1,46 @@
 from django.shortcuts import render, redirect
 from .models import Task
 from .serializers import TaskSerializer
-from django.http import JsonResponse
+from django.contrib.auth import authenticate, logout, login
+from django.contrib.auth.models import User
+
+
+def log(request):
+    if request.method == 'POST':
+        user = authenticate(username=request.POST['user'], password=request.POST['pass'])
+        if user and user.is_active == True:
+            login(request, user)
+            return redirect('/')
+        else:
+            return render(request, 'main/log.html', {'message': 'Неверный логин или пароль'})
+
+    return render(request, 'main/log.html')
+
+
+def sign(request):
+    if request.method == 'POST':
+        try:
+            user = User.objects.create_user(username=request.POST['user'], password=request.POST['pass'])
+            user.save()
+        except:
+            pass
+
+        return redirect('/')
+
+    return render(request, 'main/sign.html')
 
 
 def hello(request):
-    solved_tasks = Task.objects.filter(user=request.user, status="Solved")
-    unsolved_tasks = Task.objects.filter(user=request.user, status="Waiting")
-    solved_serializer = TaskSerializer(solved_tasks, many=True)
-    unsolved_serializer = TaskSerializer(unsolved_tasks, many=True)
+    if request.user.is_authenticated:
+        solved_tasks = Task.objects.filter(user=request.user, status="Solved")
+        unsolved_tasks = Task.objects.filter(user=request.user, status="Waiting")
+        solved_serializer = TaskSerializer(solved_tasks, many=True)
+        unsolved_serializer = TaskSerializer(unsolved_tasks, many=True)
 
-    return render(request, "main/index.html", {"solved_tasks": solved_serializer.data,
-                                               "unsolved_tasks": unsolved_serializer.data})
+        return render(request, "main/index.html", {"solved_tasks": solved_serializer.data,
+                                                   "unsolved_tasks": unsolved_serializer.data})
+    else:
+        return redirect('/sign')
 
 
 def add_task(request):
@@ -21,5 +50,21 @@ def add_task(request):
     task.user = request.user
     task.save()
 
+    check_tasks()
+
     return redirect('/')
 
+
+def out(request):
+    logout(request)
+    return redirect('/')
+
+
+def check_tasks():
+    tasks = Task.objects.filter(status="Waiting")
+    if len(tasks) >= 5:
+        solve_tasks()
+
+
+def solve_tasks():
+    pass
