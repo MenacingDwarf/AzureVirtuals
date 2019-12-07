@@ -5,7 +5,9 @@ from django.http import JsonResponse
 
 
 def hello(request):
-    tasks = Task.objects.filter(user=request.user)
-    serializer = TaskSerializer(tasks, many=True)
-    print(len(tasks))
-    return render(request, "main/index.html", {"tasks": serializer.data})
+    solved_tasks = Task.objects.filter(user=request.user, status="Solved")
+    unsolved_tasks = Task.objects.filter(user=request.user, status="Waiting")
+    solved_serializer = TaskSerializer(solved_tasks, many=True)
+    unsolved_serializer = TaskSerializer(unsolved_tasks, many=True)
+    return render(request, "main/index.html", {"solved_tasks": solved_serializer.data,
+                                               "unsolved_tasks": unsolved_serializer.data})
