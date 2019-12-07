@@ -8,4 +8,5 @@ class Task(models.Model):
     operation_type = models.CharField(max_length=15)
     amount = models.FloatField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    solution = models.CharField(max_length=15, default=None, null=True, blank=True)
 

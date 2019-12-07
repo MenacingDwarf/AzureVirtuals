@@ -38,7 +38,25 @@
                 <div class="col-8">
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="list-home" role="tabpanel"
-                             aria-labelledby="list-home-list">Not solved tasks
+                             aria-labelledby="list-home-list">
+                            {% for task in tasks %}
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Task number {{ task.id }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">Status: {{ task.status }}</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="font-weight-bold">Parameters:</p>
+                                        <ul>
+                                            <li class="font-italic">Operation type: {{ task.operation_type }}</li>
+                                            <li class="font-italic">Amount: {{ task.amount }}</li>
+                                        </ul>
+                                    </div>
+                                <div class="card-body">
+                                    Solution: {{ task.solution }}
+                                </div>
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="tab-pane fade" id="list-profile" role="tabpanel"
                              aria-labelledby="list-profile-list">Solved tasks
