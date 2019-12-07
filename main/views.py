@@ -3,6 +3,7 @@ from .models import Task
 from .serializers import TaskSerializer
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
+import subprocess
 
 
 def log(request):
@@ -62,9 +63,12 @@ def out(request):
 
 def check_tasks():
     tasks = Task.objects.filter(status="Waiting")
-    if len(tasks) >= 5:
+    print(len(tasks))
+    if len(tasks) >= 2:
         solve_tasks()
 
 
 def solve_tasks():
-    pass
+    subprocess.run("az vm start --name MyVm --no-wait --resource-group MyResourceGroup", shell=True)
+    subprocess.run("ssh azureuser@13.90.157.122 python3 task_solution/task_solution.py exit", shell=True)
+    subprocess.run("az vm stop --resource-group MyResourceGroup --name MyVm", shell=True)
