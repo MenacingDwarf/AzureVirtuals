@@ -63,12 +63,9 @@ def out(request):
 
 def check_tasks():
     tasks = Task.objects.filter(status="Waiting")
-    print(len(tasks))
     if len(tasks) >= 2:
         solve_tasks()
 
 
 def solve_tasks():
-    subprocess.run("az vm start --name MyVm --no-wait --resource-group MyResourceGroup", shell=True)
-    subprocess.run("ssh azureuser@13.90.157.122 python3 task_solution/task_solution.py exit", shell=True)
-    subprocess.run("az vm stop --resource-group MyResourceGroup --name MyVm", shell=True)
+    subprocess.Popen("bash main/script.sh", shell=True)
