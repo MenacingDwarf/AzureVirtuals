@@ -7,26 +7,42 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+<header class="container-fluid bg-dark mb-5">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
+        <a class="navbar-brand" href="#">FRAUD PREDICTION</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse mr-sm-2" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login/">Already registered? Login!<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <h1>Зарегистрируйтесь</h1>
 
-<h1>Зарегистрируйтесь</h1>
-<a href="/login/">Войдите</a>
-
-<form action="/sign/" method="post" style="padding: 20%">
-    <p style="color: red">{{ message }}</p>
-    {% csrf_token %}
-    <div class="form-group">
-        <h3>Заполните все поля для входа в систему</h3>
-        <label for="exampleInputEmail1">Адрес электронной почты</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" name="user" aria-describedby="emailHelp"
-               placeholder="example@mail.ru" required>
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Пароль</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" name="pass" placeholder="*********"
-               required>
-    </div>
-    <button type="submit" class="btn btn-primary">Войти</button>
-</form>
+    <form action="/sign/" method="post" class="w-50">
+        <p style="color: red">{{ message }}</p>
+        {% csrf_token %}
+        <div class="form-group">
+            <h3>Заполните все поля для входа в систему</h3>
+            <label for="exampleInputEmail1">Адрес электронной почты</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="user" aria-describedby="emailHelp"
+                   placeholder="example@mail.ru" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Пароль</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="pass" placeholder="*********"
+                   required>
+        </div>
+        <button type="submit" class="btn btn-dark">Зарегистрироваться</button>
+    </form>
+</div>
 
 </body>
 </html>

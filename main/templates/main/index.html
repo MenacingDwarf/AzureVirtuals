@@ -17,27 +17,51 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<header class="container-fluid bg-primary mb-5">
-    <nav class="navbar navbar-light bg-primary text-white container">
-        <a class="navbar-brand text-white font-weight-bold text-uppercase" href="#">Fraud prediction</a>
+<header class="container-fluid bg-dark mb-5">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
+        <a class="navbar-brand" href="#">FRAUD PREDICTION</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse mr-sm-2" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="logout/">Logout<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
     </nav>
 </header>
 <div class="container">
     <div class="row">
+        <div class="col-4">
+            <div class="text-center">
+                <h1>New task</h1>
+                <p>Type transaction information and wait for your solution</p>
+            </div>
+            <form class="w-100" action="add_task/" method="post">{% csrf_token %}
+                <div class="form-group">
+                    <label for="operationType">Operation Type</label>
+                    <input class="form-control" name="operation_type" id="operationType"
+                           aria-describedby="operationHelp">
+                    <small id="operationHelp" class="form-text text-muted">Here you should type operation type</small>
+                </div>
+                <div class="form-group">
+                    <label for="operationAmount">Operation Amount</label>
+                    <input class="form-control" name="amount" id="operationAmount">
+                </div>
+                <button type="submit" class="btn btn-dark">Send Task</button>
+            </form>
+        </div>
         <div class="col-8">
             <h1>Your tasks:</h1>
             <div class="row">
-                <div class="col-4">
-                    <div class="list-group" id="list-tab" role="tablist">
-                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
-                           href="#list-home" role="tab" aria-controls="home">Not solved</a>
-                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
-                           href="#list-profile" role="tab" aria-controls="profile">Solved</a>
-                    </div>
-                </div>
                 <div class="col-8">
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active align-center" style="align-items: center; height: 30rem; overflow: scroll;" id="list-home" role="tabpanel"
+                        <div class="tab-pane fade show active align-center"
+                             style="align-items: center; height: 30rem; overflow: auto;" id="list-home"
+                             role="tabpanel"
                              aria-labelledby="list-home-list">
                             {% if unsolved_tasks|length != 0 %}
                                 {% for task in unsolved_tasks %}
@@ -62,7 +86,9 @@
                                 No tasks
                             {% endif %}
                         </div>
-                        <div class="tab-pane fade align-center" style="align-items: center; height: 30rem; overflow: scroll;" id="list-profile" role="tabpanel"
+                        <div class="tab-pane fade align-center"
+                             style="align-items: center; height: 30rem; overflow: auto;" id="list-profile"
+                             role="tabpanel"
                              aria-labelledby="list-profile-list">
                             {% if solved_tasks|length != 0 %}
                                 {% for task in solved_tasks %}
@@ -89,28 +115,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="text-center">
-                <h1>Hello!</h1>
-                <p>Type transaction information and wait for your solution</p>
-            </div>
-            <form class="w-100" action="add_task/" method="post">{% csrf_token %}
-                <div class="form-group">
-                    <label for="operationType">Operation Type</label>
-                    <input class="form-control" name="operation_type" id="operationType" aria-describedby="operationHelp">
-                    <small id="operationHelp" class="form-text text-muted">Here you should type operation type</small>
+                <div class="col-4">
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
+                           href="#list-home" role="tab" aria-controls="home">Not solved</a>
+                        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
+                           href="#list-profile" role="tab" aria-controls="profile">Solved</a>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="operationAmount">Operation Amount</label>
-                    <input class="form-control" name="amount" id="operationAmount">
-                </div>
-                <button type="submit" class="btn btn-primary">Send Task</button>
-            </form>
+            </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>

@@ -24,7 +24,7 @@ def sign(request):
             user = User.objects.create_user(username=request.POST['user'], password=request.POST['pass'])
             user.save()
         except:
-            pass
+            return render(request, 'main/sign.html', {'message': 'Пользователь уже зарегистрирован'})
 
         return redirect('/')
 
