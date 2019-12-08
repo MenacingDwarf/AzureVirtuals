@@ -9,7 +9,7 @@ port = '5432'
 
 conn = psycopg2.connect(host=host, dbname=name, user=user, password=password)
 cur = conn.cursor()
-cur.execute("SELECT * FROM main_task WHERE status='Waiting'")
+cur.execute("SELECT * FROM main_task WHERE status='Solving'")
 tasks = cur.fetchall()
 for task in tasks:
     time.sleep(10)

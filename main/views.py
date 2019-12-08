@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Task
+from django.db.models import Q
 from .serializers import TaskSerializer
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
@@ -34,7 +35,7 @@ def sign(request):
 def hello(request):
     if request.user.is_authenticated:
         solved_tasks = Task.objects.filter(user=request.user, status="Solved")
-        unsolved_tasks = Task.objects.filter(user=request.user, status="Waiting")
+        unsolved_tasks = Task.objects.filter(Q(user=request.user), ~Q(status="Solved"))
         solved_serializer = TaskSerializer(solved_tasks, many=True)
         unsolved_serializer = TaskSerializer(unsolved_tasks, many=True)
 
@@ -64,6 +65,9 @@ def out(request):
 def check_tasks():
     tasks = Task.objects.filter(status="Waiting")
     if len(tasks) >= 2:
+        for task in tasks:
+            task.status = "Solving"
+            task.save()
         solve_tasks()
 
 
