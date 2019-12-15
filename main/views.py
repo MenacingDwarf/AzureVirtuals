@@ -64,7 +64,7 @@ def out(request):
 
 def check_tasks():
     tasks = Task.objects.filter(status="Waiting")
-    if len(tasks) >= 2:
+    if len(tasks) >= 5:
         for task in tasks:
             task.status = "Solving"
             task.save()
