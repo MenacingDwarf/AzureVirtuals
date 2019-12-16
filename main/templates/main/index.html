@@ -43,12 +43,12 @@
             <form class="w-100" action="add_task/" method="post">{% csrf_token %}
                 <div class="form-group">
                     <label for="operationType">Operation Type</label>
-                    <select name="operationType" class="form-control" id="operationType">
+                    <select name="operation_type" class="form-control" id="operationType">
                         <option value="PAYMENT">PAYMENT</option>
                         <option value="CASH-IN">CASH-IN</option>
                         <option value="CASH-OUT">CASH-OUT</option>
                         <option value="DEBIT">DEBIT</option>
-                        <option value="TRANSFER">TRANSFER</optionva>
+                        <option value="TRANSFER">TRANSFER</option>
                     </select>
                 </div>
                 <div class="form-group">
