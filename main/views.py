@@ -34,13 +34,13 @@ def sign(request):
 
 def hello(request):
     if request.user.is_authenticated:
-        solved_tasks = Task.objects.filter(user=request.user, status="Solved")
-        unsolved_tasks = Task.objects.filter(Q(user=request.user), ~Q(status="Solved"))
+        solved_tasks = Task.objects.filter(user=request.user, status="Solved").reverse()
+        unsolved_tasks = Task.objects.filter(Q(user=request.user), ~Q(status="Solved")).reverse()
         solved_serializer = TaskSerializer(solved_tasks, many=True)
         unsolved_serializer = TaskSerializer(unsolved_tasks, many=True)
 
-        return render(request, "main/index.html", {"solved_tasks": sorted(solved_serializer.data, key=lambda task: task['id'], reverse=False),
-                                                   "unsolved_tasks": sorted(unsolved_serializer.data, key=lambda task: task['id'], reverse=False)})
+        return render(request, "main/index.html", {"solved_tasks": solved_serializer.data,
+                                                   "unsolved_tasks": unsolved_serializer.data})
     else:
         return redirect('/sign')
 
