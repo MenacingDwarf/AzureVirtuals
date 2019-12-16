@@ -63,7 +63,7 @@ def out(request):
 
 
 def check_tasks():
-    tasks = Task.objects.filter(status="Waiting")
+    tasks = Task.objects.filter(Q(status="Waiting"), ~Q(status="Solving"))
     if len(tasks) >= 5:
         for task in tasks:
             task.status = "Solving"

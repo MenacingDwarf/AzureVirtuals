@@ -24,9 +24,12 @@ algorithm = RandomForestClassifier(n_estimators=100, max_depth=3)
 algorithm.fit(X, y)
 
 for task in tasks:
-    prediction = algorithm.predict([[lab_encoder.transform([task[1]])[0], task[2]]])[0]
-    result = "Fraud" if prediction == 1 else "Not fraud"
-    cur.execute("UPDATE main_task SET status='Solved', solution=%s WHERE id=%s", (result, task[0],))
-    conn.commit()
+    try:
+        prediction = algorithm.predict([[lab_encoder.transform([task[1]])[0], task[2]]])[0]
+        result = "Fraud" if prediction == 1 else "Not fraud"
+        cur.execute("UPDATE main_task SET status='Solved', solution=%s WHERE id=%s", (result, task[0],))
+        conn.commit()
+    except:
+        cur.execute("UPDATE main_task SET status='Error' WHERE id=%s", (task[0],))
 
 conn.close()
