@@ -68,7 +68,7 @@
                              role="tabpanel"
                              aria-labelledby="list-home-list">
                             {% if unsolved_tasks|length != 0 %}
-                                {% for task in unsolved_tasks|sort(attribute='id', reverse = True) %}
+                                {% for task in unsolved_tasks %}
                                     <div class="card mb-2" style="width: 20rem;">
                                         <div class="card-body">
                                             <h5 class="card-title">Task number {{ task.id }}</h5>
@@ -95,7 +95,7 @@
                              role="tabpanel"
                              aria-labelledby="list-profile-list">
                             {% if solved_tasks|length != 0 %}
-                                {% for task in solved_tasks|sort(attribute='id', reverse = True) %}
+                                {% for task in solved_tasks %}
                                     <div class="card mb-2" style="width: 20rem;">
                                         <div class="card-body">
                                             <h5 class="card-title">Task number {{ task.id }}</h5>

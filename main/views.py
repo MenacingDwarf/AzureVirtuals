@@ -39,8 +39,8 @@ def hello(request):
         solved_serializer = TaskSerializer(solved_tasks, many=True)
         unsolved_serializer = TaskSerializer(unsolved_tasks, many=True)
 
-        return render(request, "main/index.html", {"solved_tasks": solved_serializer.data,
-                                                   "unsolved_tasks": unsolved_serializer.data})
+        return render(request, "main/index.html", {"solved_tasks": sorted(solved_serializer.data, reverse=True),
+                                                   "unsolved_tasks": sorted(unsolved_serializer.data, reverse=True)})
     else:
         return redirect('/sign')
 
