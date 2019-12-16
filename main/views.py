@@ -34,8 +34,8 @@ def sign(request):
 
 def hello(request):
     if request.user.is_authenticated:
-        solved_tasks = Task.objects.filter(user=request.user, status="Solved").reverse()
-        unsolved_tasks = Task.objects.filter(Q(user=request.user), ~Q(status="Solved")).reverse()
+        solved_tasks = Task.objects.filter(user=request.user, status="Solved").order_by('id')
+        unsolved_tasks = Task.objects.filter(Q(user=request.user), ~Q(status="Solved")).order_by('id')
         solved_serializer = TaskSerializer(solved_tasks, many=True)
         unsolved_serializer = TaskSerializer(unsolved_tasks, many=True)
 
